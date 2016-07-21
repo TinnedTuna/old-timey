@@ -38,7 +38,7 @@ timey_out() {
 
 # Show our current hours today.
 timey_hours() {
-  ledger -f "${TIMELOG}" bal -p "since today";
+  ledger --time-colon --file "${TIMELOG}" bal -p "since today";
 }
 
 # Switch the user's task.
