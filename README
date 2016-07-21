@@ -7,7 +7,6 @@ It logs task start and end times into ~/.timelog.
 == TODO
 
   # Tab completion?
-  # Interruption support.
   # Installer makefile :-)
 
 == Usage
@@ -38,29 +37,20 @@ Interruptions are a fact of life. Old Timey is written with this in mind.
 To note that you've had an interruption, use the following command:
 
 ----
-timey int
+$> timey int
+Interruption category [interruption]?
 ----
 
-This stops the previous task and starts an interruption. Once the interuption
-is over, use the task:
-
-----
-timey on-task
-----
-
-This will prompt for a categorisation of the interruption, and a description.
-
-----
-Interruption type [interruption]:
-Description []:
-----
+The prompt waits until filled in. Fill it in when the interruption has been 
+handled. It then logs the length of the interruption appropriately in the 
+timelog.
 
 Note that the default is just "interruption" You're adivsed to categorise
 coarsely with this, for example:
 
 ----
 Interruption type [interruption]: interruption:phone-call
-Description: customer support call.
+Back on project development:review:sk-123
 ----
 
 This results in a new addition to the time log:
@@ -70,7 +60,7 @@ i 2016-07-21 09:00:00 development:testing:sk-754
 o 2016-07-21 09:20:00
 i 2016-07-21 09:20:00 development:review:sk-123
 o 2016-07-21 10:30:00
-i 2016-07-21 10:30:00 interruption:phone-call  customer call
+i 2016-07-21 10:30:00 interruption:phone-call
 o 2016-07-21 10:35:00
 i 2016-07-21 10:35:00 development:review:sk-123
 ----

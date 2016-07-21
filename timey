@@ -36,10 +36,53 @@ timey_out() {
   printf "o %s\n" "${CURRENT_DATE}" >> "${TIMELOG}"
 }
 
+# Show our current hours today.
+timey_hours() {
+  ledger -f "${TIMELOG}" bal -p "since today";
+}
+
+# Switch the user's task.
+timey_interruption() {
+  # Determine if we're in a task already.
+  LAST_LOG_LINE=$(tail -n 1 "${TIMELOG}" | cut -d ' ' -f 1)
+  case "${LAST_LOG_LINE}" in
+    [!i]) printf "Cannot log interruption, not in a task.\n"; exit 1;;
+  esac 
+
+  # Get the last task we were working on.
+  LAST_PROJECT=$(grep '^i' "${TIMELOG}" | tail -n 1 | cut -d ' ' -f 4)
+
+  # Stop the current task.
+  timey_out
+
+  # Read an interruption.
+  read -p "Interruption category [interruption]? " INTERRUPTION_CATEGORY
+  if [ -z "${INTERRUPTION_CATEGORY}" ]
+  then
+    INTERRUPTION_CATEGORY="interruption"
+  fi
+  timey_in "${INTERRUPTION_CATEGORY}"
+  CURRENT_DATE=$(date "+%F %T")
+  timey_out;
+
+  # Restored us to the previous task.
+  timey_in "${LAST_PROJECT}"
+  printf "Back on task %s\n" "${LAST_PROJECT}"
+
+  # We must force exit, if we try to continue past this point, we've 
+  # re-used CURRENT_DATE and it not longer represents the time at program
+  # start.
+  exit 0;
+}
+  
+  
+
 
 case "${COMMAND}" in
   in) timey_in "$1" ;;
   out) timey_out ;;
+  hours) timey_hours ;;
+  int) timey_interruption ;;
   *) printf "Uh-oh!"; exit 1;;
 esac
 
