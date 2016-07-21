@@ -1,0 +1,45 @@
+#!/bin/sh
+
+#
+# Simple time tracking tool. Logs task start and end times in ~/.timelog. The
+# file format is known as "timeclock"
+#
+# Author: Dan Turner
+#
+
+# Flags for safer shell-scripting.
+set -euf
+
+CURRENT_DATE=$(date "+%F %T")
+COMMAND="$1"
+TIMELOG="${HOME}/.timelog"
+shift # Ignore the command once we've grabbed it. 
+
+# Mark us as "in" a task.
+timey_in() {
+  # If we're already in a task, complain.
+  LAST_LOG_LINE=$(tail -n 1 "${TIMELOG}" | cut -d ' ' -f 1)
+  case "${LAST_LOG_LINE}" in
+    [!o]) printf "Cannot start timing, still in a task.\n"; exit 1;;
+  esac 
+  CATEGORY="$1"
+  printf "i %s %s\n" "${CURRENT_DATE}" "${CATEGORY}" >> "${TIMELOG}"
+}
+  
+# Mark the user as out of a task.
+timey_out() {
+  # Determine if we're in a task already.
+  LAST_LOG_LINE=$(tail -n 1 "${TIMELOG}" | cut -d ' ' -f 1)
+  case "${LAST_LOG_LINE}" in
+    [!i]) printf "Cannot clock out, not in a task.\n"; exit 1;;
+  esac 
+  printf "o %s\n" "${CURRENT_DATE}" >> "${TIMELOG}"
+}
+
+
+case "${COMMAND}" in
+  in) timey_in "$1" ;;
+  out) timey_out ;;
+  *) printf "Uh-oh!"; exit 1;;
+esac
+

@@ -1,0 +1,78 @@
+= Old Timey
+
+Old Timey is a time-logging system which is based around the time.clock format.
+
+It logs task start and end times into ~/.timelog.
+
+== TODO
+
+  # Tab completion?
+  # Interruption support.
+  # Installer makefile :-)
+
+== Usage
+
+To start tracking time on a project:
+
+----
+timey in development:testing:sk-754
+----
+
+You can clock-out of a task at any time:
+
+----
+timey out
+----
+
+This results in a new set of lines in the timelog:
+
+----
+i 2016-07-21 09:00:00 development:testing:sk-754
+o 2016-07-21 09:20:00
+----
+
+=== Handling interruptions
+
+Interruptions are a fact of life. Old Timey is written with this in mind.
+
+To note that you've had an interruption, use the following command:
+
+----
+timey int
+----
+
+This stops the previous task and starts an interruption. Once the interuption
+is over, use the task:
+
+----
+timey on-task
+----
+
+This will prompt for a categorisation of the interruption, and a description.
+
+----
+Interruption type [interruption]:
+Description []:
+----
+
+Note that the default is just "interruption" You're adivsed to categorise
+coarsely with this, for example:
+
+----
+Interruption type [interruption]: interruption:phone-call
+Description: customer support call.
+----
+
+This results in a new addition to the time log:
+
+----
+i 2016-07-21 09:00:00 development:testing:sk-754
+o 2016-07-21 09:20:00
+i 2016-07-21 09:20:00 development:review:sk-123
+o 2016-07-21 10:30:00
+i 2016-07-21 10:30:00 interruption:phone-call  customer call
+o 2016-07-21 10:35:00
+i 2016-07-21 10:35:00 development:review:sk-123
+----
+
+
