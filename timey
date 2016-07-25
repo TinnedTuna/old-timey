@@ -75,7 +75,18 @@ timey_interruption() {
   exit 0;
 }
   
-  
+# Periodically monitor time usage.
+timey_monitor() {
+  while true
+  do
+      DATE=$(date +"%F %T")
+      DASHES="--------------------"
+      printf "%s  %s\n" "${DASHES}" "${DATE}"
+      timey_hours
+      printf "\n"
+      sleep 300
+  done
+}
 
 
 case "${COMMAND}" in
@@ -83,6 +94,7 @@ case "${COMMAND}" in
   out) timey_out ;;
   hours) timey_hours ;;
   int) timey_interruption ;;
+  monitor) timey_monitor ;;
   *) printf "Uh-oh!"; exit 1;;
 esac
 

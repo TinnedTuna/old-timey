@@ -88,3 +88,16 @@ i 2016-07-21 10:30:00 interruption:phone-call
 o 2016-07-21 10:35:00
 i 2016-07-21 10:35:00 development:review:sk-123
 ----
+
+== Monitoring progress
+
+Monitoring your time usage can be useful tomake sure you're not spending too
+much time on a single task.
+
+You can use Old Timey's monitoring function for this:
+
+----
+timey monitor
+----
+
+This prints a summary of your time usage this day every 5 minutes.
