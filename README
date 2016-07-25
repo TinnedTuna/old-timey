@@ -41,6 +41,9 @@ To start tracking time on a project:
 timey in development:testing:sk-754
 ----
 
+If you're already in a task, this will warn you and _not_ switch tasks. If you
+need to handle an interrupt, use timey int.
+
 You can clock-out of a task at any time:
 
 ----
@@ -53,6 +56,9 @@ This results in a new set of lines in the timelog:
 i 2016-07-21 09:00:00 development:testing:sk-754
 o 2016-07-21 09:20:00
 ----
+
+If you are not currently in a task, no action will be taken and you will be
+notified of the issue.
 
 === Handling interruptions
 
