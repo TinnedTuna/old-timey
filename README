@@ -7,7 +7,37 @@ It logs task start and end times into ~/.timelog.
 == TODO
 
   # Tab completion?
-  # Installer makefile :-)
+
+== Installation
+
+Installing the tool is done through the use of the provided makefile:
+
+----
+sudo make install
+----
+
+You'll also need to initialise you timelog file before starting:
+
+----
+touch ~/.timelog
+----
+
+=== Uninstallation
+
+Sometimes, things just don't work out. To remove the tool, you can use the 
+uninstall target of the provided Makefile:
+
+----
+sudo make uninstall
+----
+
+You can optionally throw your timelog file away too.
+
+WARNING: This irrevocably removes your timelog history.
+
+----
+rm ~/.timelog
+----
 
 == Usage
 
@@ -64,5 +94,3 @@ i 2016-07-21 10:30:00 interruption:phone-call
 o 2016-07-21 10:35:00
 i 2016-07-21 10:35:00 development:review:sk-123
 ----
-
-
