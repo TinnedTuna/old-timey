@@ -88,6 +88,11 @@ timey_monitor() {
   done
 }
 
+# List all of the tasks matching the given pattern
+timey_tasks() {
+  cat "${TIMELOG}" | cut -d' ' -f 4 | sort | uniq | grep "$1" 
+}
+
 
 case "${COMMAND}" in
   in) timey_in "$1" ;;
@@ -95,6 +100,7 @@ case "${COMMAND}" in
   hours) timey_hours ;;
   int) timey_interruption ;;
   monitor) timey_monitor ;;
+  tasks) timey_tasks "$1" ;;
   *) printf "Uh-oh!"; exit 1;;
 esac
 

@@ -60,6 +60,21 @@ o 2016-07-21 09:20:00
 If you are not currently in a task, no action will be taken and you will be
 notified of the issue.
 
+=== Listing all tasks
+
+To list all tasks that have been used in the past, use the "tasks" command:
+
+----
+timey tasks catch-up
+----
+
+Note that the tasks command requires a pattern to match. To display all tasks
+ever, use "." as the pattern:
+
+----
+timey tasks .
+----
+
 === Handling interruptions
 
 Interruptions are a fact of life. Old Timey is written with this in mind.
