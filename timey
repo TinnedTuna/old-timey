@@ -41,6 +41,11 @@ timey_hours() {
   ledger --time-colon --file "${TIMELOG}" bal -p "since today";
 }
 
+# Show our last week's hours.
+timey_weekly_hours() {
+  ledger --time-colon --file "${TIMELOG}" bal -p "since 7 days ago";
+}
+
 # Switch the user's task.
 timey_interruption() {
   # Determine if we're in a task already.
@@ -98,6 +103,7 @@ case "${COMMAND}" in
   in) timey_in "$1" ;;
   out) timey_out ;;
   hours) timey_hours ;;
+  weekly-hours) timey_weekly_hours ;;
   int) timey_interruption ;;
   monitor) timey_monitor ;;
   tasks) timey_tasks "$1" ;;

@@ -111,9 +111,53 @@ o 2016-07-21 10:35:00
 i 2016-07-21 10:35:00 development:review:sk-123
 ----
 
-== Monitoring progress
+=== Time spent reports
 
-Monitoring your time usage can be useful tomake sure you're not spending too
+==== Daily
+
+To get a report of today's tasks and the time spent on them, use:
+
+----
+$> timey hours
+               13:4m  infrastructure:copy-database:warwick
+               16:2m  logs
+--------------------
+               30:0m
+----
+
+This will aggregate across tasks with comon colon-separated prefixes.
+
+==== Weekly
+
+A report of the last week's task can be produced:
+
+----
+$> timey weekly-hours
+               1:26h  development
+               30:6m    review:sk-1198
+               54:5m    spec:sk-1199
+               6:21h  infrastructure
+               36:4m    capacity-planning:testing
+               13:4m    copy-database:warwick
+               22:5m    discussion:pentest-scope
+                3:1m    nginx:sforge4
+               35:3m    pen-test:integration
+                4:1m    quarantine:mmu
+               4:25h    sforge4
+               2:20h      install
+               42:1m      jetty
+               1:22h      postgresql
+               1:48h  logs
+               43:0m  security:risk-assessment:mmu-staging-users
+               20:5m  support:help-5071
+--------------------
+              10:38h
+----
+
+=== Monitoring progress
+
+
+Monitoring your time usage can be useful to make sure you're not spending too
 much time on a single task.
 
 You can use Old Timey's monitoring function for this:
