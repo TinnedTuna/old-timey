@@ -43,7 +43,7 @@ timey in development:testing:sk-754
 ----
 
 If you're already in a task, this will warn you and _not_ switch tasks. If you
-need to handle an interrupt, use timey int.
+need to handle an interrupt, use `timey int`.
 
 You can clock-out of a task at any time:
 
