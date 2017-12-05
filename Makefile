@@ -1,7 +1,4 @@
-init:
-	touch ~/.timelog
-
-install: init
+install:
 	cp timey /usr/local/bin/timey
 
 uninstall:

@@ -5,15 +5,23 @@
 # file format is known as "timeclock"
 #
 # Author: Dan Turner
+# Since: 2016-06-21
+# Licence: Simplified BSD
 #
 
 # Flags for safer shell-scripting.
-set -euf
+set -eufC
 
 CURRENT_DATE=$(date "+%F %T")
 COMMAND="$1"
 TIMELOG="${HOME}/.timelog"
 shift # Ignore the command once we've grabbed it. 
+
+if [ ! -w "${TIMELOG}" ]
+then
+  printf "Missing \"%s\". Creating.\n" "${TIMELOG}"
+  touch "${TIMELOG}"
+fi
 
 # Mark us as "in" a task.
 timey_in() {
